@@ -16,6 +16,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      img: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       like: {
         type: Sequelize.INTEGER,
         defaultValue: 0
@@ -23,6 +27,14 @@ module.exports = {
       dislike: {
         type: Sequelize.INTEGER,
         defaultValue: 0
+      },
+      authorId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

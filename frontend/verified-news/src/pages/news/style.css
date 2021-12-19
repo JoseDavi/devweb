@@ -1,0 +1,15 @@
+.filter {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+}
+
+.news-container {
+  padding:  0 10%;
+}
+
+.title {
+  display: flex; 
+  justify-content: center;
+}

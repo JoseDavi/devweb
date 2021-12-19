@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class News extends Model {
 
     static associate(models) {
-      News.belongsTo(models.User, { foreignKey: 'id', as: 'authorId' })
+      News.belongsTo(models.User, { foreignKey: 'authorId', as: 'author' })
     }
 
   }
@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       msg: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      img: {
+        type: DataTypes.STRING,
+        allowNull: true
       },
       like: {
         type: DataTypes.INTEGER,

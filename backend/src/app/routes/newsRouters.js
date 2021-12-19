@@ -5,5 +5,7 @@ const newsController = require('../controllers/newsController')
 
 router.get('/', newsController.getAll);
 router.post('/', newsController.create);
+router.patch('/:id/dislike', newsController.dislike);
+router.patch('/:id/like', newsController.like);
 
 module.exports = router;

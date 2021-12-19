@@ -1,0 +1,44 @@
+article {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: groove;
+  border-top: groove;
+}
+
+.image {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.actionsButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.assignment  {
+  display: flex;
+  align-items: center;
+}
+
+.assignment button img {
+  margin: 0 5px;
+}
+
+.assignment button {
+  display: flex;
+  align-items: flex-end;
+}
+
+#like {
+  margin-right: 10px;
+}
