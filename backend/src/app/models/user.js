@@ -1,4 +1,5 @@
 const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -24,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
+      },
+      password: {
+        type: DataTypes.VIRTUAL,
+      },
+      passwordHash: {
+        type: DataTypes.STRING,
       }
     },
     {
@@ -31,5 +38,14 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User'
     }
   );
+
+  User.addHook('beforeSave', async (user) => {
+    if (user.password) {
+      user.passwordHash = await bcrypt.hash(user.password, 5);
+    }
+
+    return user;
+  });
+
   return User;
 }
