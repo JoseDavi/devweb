@@ -50,11 +50,12 @@ const getAll = async (query) => {
 
   } else {
     news = await News.findAll({
+      where: whereNews,
       include: [
         {
           model: User,
           as: 'author',
-          where
+          where: whereAuthor
         }
       ]
     });

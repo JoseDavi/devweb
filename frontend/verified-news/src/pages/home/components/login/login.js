@@ -28,8 +28,8 @@ function Login() {
     try {
       const res = await fetch('http://localhost:3001/auth/', requestOptions);
       const data = await res.json();
-      localStorage.setItem("userId", data.user.id);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("../news", { replace: true });
     } catch {
       console.log("error")

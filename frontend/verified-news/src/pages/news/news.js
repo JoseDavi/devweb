@@ -29,10 +29,9 @@ function News() {
   }
 
   async function filter() {
-    const res = await fetch(`http://localhost:3001/news?page=${page}&pageSize=${pageSize}&authorName=${name}&msg=${msg}`, { method: 'get' });
+    const res = await fetch(`http://localhost:3001/news?authorName=${name}&msg=${msg}`, { method: 'get' });
     const data = await res.json();
-    setNews(data.news.rows);
-    setpages(data.news.pages);
+    setNews(data.news);
   }
 
   function updatePage(page) {

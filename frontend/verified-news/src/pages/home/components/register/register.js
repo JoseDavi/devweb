@@ -33,8 +33,8 @@ function Register() {
     try {
       const res = await fetch('http://localhost:3001/users', requestOptions);
       const data = await res.json();
-      localStorage.setItem("userId", data.user.id);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("../news", { replace: true });
     } catch {
       console.log("error")
@@ -46,7 +46,7 @@ function Register() {
     <section className='content'>
       <form className='flex'>
         <label className='flex'>
-          Name:
+          Nome:
           <input type="text" value={name} onChange={(e) => handleName(e.target.value)} />
         </label>
         <label className='flex'>
@@ -54,12 +54,12 @@ function Register() {
           <input type="text" value={email} onChange={(e) => handleEmail(e.target.value)} />
         </label>
         <label className='flex'>
-          Senha:
+          senha:
           <input type="password" value={password} onChange={(e) => handleSenha(e.target.value)} />
         </label>
       </form>
       <button className='submit' onClick={()=>register()}>
-        <span>Register</span>
+        <span>Registrar</span>
       </button>
     </section>
     </>

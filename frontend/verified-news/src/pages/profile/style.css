@@ -1,0 +1,23 @@
+.continer-profile {
+  flex-direction: column;
+  border-bottom: none;
+  border-top: none;
+  align-items: center;
+}
+
+.user-data {
+  width: 50%;
+  align-items: center;
+  text-align: center;
+}
+
+.new-news {
+  width: 50%;
+  align-self: center;
+  text-align: center;
+}
+
+.justify {
+  text-align: left;
+  font-weight: bold;
+}
