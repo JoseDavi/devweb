@@ -31,8 +31,9 @@ function Login() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("../news", { replace: true });
-    } catch {
-      console.log("error")
+      window.location.reload(false);
+    } catch (error){
+      console.log("Error: ", error)
     }
     
   }

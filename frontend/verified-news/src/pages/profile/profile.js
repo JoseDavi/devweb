@@ -1,5 +1,4 @@
 import './style.css';
-import Header from '../../shared/components/header/header';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +6,7 @@ function Profile() {
 
   const [title, setTitle] = useState('');
   const [msg, setMsg] = useState('');
-  const [img, setImg] = useState('')
+  const [img, setImg] = useState('');
   const [user, setUser] = useState();
   let navigate = useNavigate();
 
@@ -53,9 +52,6 @@ function Profile() {
 
   return (
     <>
-      <section className='header'>
-        <Header />
-      </section>
       <article className='continer-profile'>
       <section className='user-data'>
         <h3>Informações</h3>

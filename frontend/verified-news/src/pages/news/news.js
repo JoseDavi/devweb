@@ -1,8 +1,8 @@
 import './style.css';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import NewsCard from './components/newsCard';
-import Header from '../../shared/components/header/header';
 import Pagination from '../../shared/components/pagination/pagination';
+import { LanguageContext } from '../../shared/utils/contexts/LanguageContext';
 
 function News() {
   const [news, setNews] = useState([])
@@ -11,6 +11,8 @@ function News() {
   const [page, setpage] = useState(1);
   const [pages, setpages] = useState(1);
   const pageSize = 10;
+
+  let languageContext = useContext(LanguageContext);
 
   useEffect(() => {
     async function load() {
@@ -40,18 +42,32 @@ function News() {
 
   return (
     <>
-      <section className='header'>
-        <Header />
-      </section>
       <section className='title'>
-        <h1>Notícias verificadas</h1>
+        {
+        languageContext.language === "pt" ? 
+          <h1>Notícias verificadas</h1>
+        :
+          <h1>Verified news</h1>
+        }
       </section>
       <section className='filter'>
-        <h2>Notícias:</h2>
+        {
+        languageContext.language === "pt" ? 
+          <h2>Notícias:</h2>
+        :
+          <h2>News:</h2>
+        }
         <div>
-          <input type="text" placeholder="Nome do autor" onChange={event => setName(event.target.value)}/>
-          <input type="text" placeholder="Conteudo da noticia" onChange={event => setMsg(event.target.value)}/>
-          <button onClick={() => filter()}>Buscar</button>
+          <input type="text" placeholder={languageContext.language === "pt" ? "Nome do autor" : "Author name"} onChange={event => setName(event.target.value)}/>
+          <input type="text" placeholder={languageContext.language === "pt" ? "Conteudo da noticia" : "Content of news"} onChange={event => setMsg(event.target.value)}/>
+          <button onClick={() => filter()}>
+            {
+            languageContext.language === "pt" ? 
+              "Buscar"
+            :
+              "Search"
+            } 
+          </button>
         </div>
       </section>
       <section className='news-container'>

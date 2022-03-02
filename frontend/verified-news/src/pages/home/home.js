@@ -17,7 +17,7 @@ function Home() {
   }
 
   return (
-    <main className='main'>
+    <main className='main-container'>
       <article className='container'>
         <section className='component'>
           {option? <Login /> : <Register />}
