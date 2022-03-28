@@ -1,6 +1,6 @@
 import "./style.css";
 import { useState, useEffect, useContext } from "react";
-import NewsCard from "./components/newsCard";
+import NewsCard from "./components/newsCard/newsCard";
 import Pagination from "../../shared/components/pagination/pagination";
 import { LanguageContext } from "../../shared/utils/contexts/LanguageContext";
 

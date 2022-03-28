@@ -22,7 +22,8 @@ article {
 .actionsButtons {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  align-items: center;
+  padding: 20px 0px;
 }
 
 .assignment  {

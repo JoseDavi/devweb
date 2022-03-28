@@ -1,10 +1,13 @@
 import "./style.css";
 import { useState, useEffect } from "react";
-import Profile from "../../profile/profile";
+import Profile from "../../../profile/profile";
+import Complaint from "../complaint/complaint";
 
 function NewsCard({ news, index, updateNews }) {
   const [user, setUser] = useState();
   const [edit, setEdit] = useState(false);
+  const [complaint, setComplaint] = useState(false);
+  const [text, setText] = useState();
 
   useEffect(() => {
     let user = undefined;
@@ -24,8 +27,15 @@ function NewsCard({ news, index, updateNews }) {
     } else return;
   }
   function editedNews(data) {
-    updateNews(data.news, index);
-    setEdit(false);
+    if (data === news) {
+      setEdit(false);
+    } else {
+      updateNews(data.news, index);
+      setEdit(false);
+    }
+  }
+  function closeModal() {
+    setComplaint(false);
   }
 
   return (
@@ -62,10 +72,21 @@ function NewsCard({ news, index, updateNews }) {
             {(user ? user.id === news.authorId : false) ? (
               <button onClick={() => setEdit(true)}>Editar</button>
             ) : null}
-            <button id="report">Report</button>
+            <button
+              id="complaint"
+              onClick={() => {
+                setComplaint(true);
+                setText(news.msg);
+              }}
+            >
+              Denunciar
+            </button>
           </div>
         </div>
         {edit ? <Profile news={news} editedNews={editedNews} /> : null}
+        {complaint ? (
+          <Complaint news={news} text={text} closeModal={closeModal} />
+        ) : null}
       </section>
     </article>
   );

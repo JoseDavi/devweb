@@ -122,6 +122,13 @@ function Profile({ news, editedNews }) {
                 <span> {user ? user.email : ""}</span>
               </label>
             </form>
+            {/* Para simplificação estou assumindo que qualquer usuario logado é um admin e pode acessar as denuncias */}
+            <button
+              className="back"
+              onClick={() => navigate("../complaints", { replace: true })}
+            >
+              <span>Denuncias</span>
+            </button>
           </section>
         ) : null}
         <section className="new-news">
@@ -153,11 +160,16 @@ function Profile({ news, editedNews }) {
               />
             </label>
           </form>
-          <div className="actionsButtons">
+          <div className="actionsButtons justify">
             {news ? (
-              <button onClick={() => editClicked()}>
-                <span>Atualizar</span>
-              </button>
+              <>
+                <button onClick={() => editedNews(news)}>
+                  <span>Cancelar</span>
+                </button>
+                <button onClick={() => editClicked()}>
+                  <span>Atualizar</span>
+                </button>
+              </>
             ) : (
               <>
                 <button
