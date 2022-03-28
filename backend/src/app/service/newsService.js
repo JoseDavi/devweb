@@ -1,5 +1,5 @@
-const { News, User } = require('../models')
-const { Op } = require('sequelize');
+const { News, User } = require("../models");
+const { Op } = require("sequelize");
 
 const getAll = async (query) => {
   const { authorName, msg } = query;
@@ -38,26 +38,25 @@ const getAll = async (query) => {
       include: [
         {
           model: User,
-          as: 'author',
-          where: whereAuthor
-        }
-      ]
+          as: "author",
+          where: whereAuthor,
+        },
+      ],
     };
 
     news = await News.findAndCountAll(options);
 
     news.pages = Math.ceil(news.count / pageSize);
-
   } else {
     news = await News.findAll({
       where: whereNews,
       include: [
         {
           model: User,
-          as: 'author',
-          where: whereAuthor
-        }
-      ]
+          as: "author",
+          where: whereAuthor,
+        },
+      ],
     });
   }
 
@@ -66,41 +65,41 @@ const getAll = async (query) => {
   }
 
   return news;
-}
+};
 
 const create = async (data) => {
   return News.create(data);
-}
+};
 
 const dislike = async (id) => {
   const news = await News.findByPk(id, {
     include: [
       {
         model: User,
-        as: 'author'
-      }
-    ]
+        as: "author",
+      },
+    ],
   });
-  const newLike = news.dislike += 1;
+  const newLike = (news.dislike += 1);
   return news.update({
-    dislike: newLike
-  })
-}
+    dislike: newLike,
+  });
+};
 
 const like = async (id) => {
   const news = await News.findByPk(id, {
     include: [
       {
         model: User,
-        as: 'author'
-      }
-    ]
+        as: "author",
+      },
+    ],
   });
-  const newLike = news.like += 1;
+  const newLike = (news.like += 1);
   return news.update({
-    like: newLike
-  })
-}
+    like: newLike,
+  });
+};
 
 const remove = async (id) => {
   const news = await News.findByPk(id);
@@ -114,10 +113,38 @@ const remove = async (id) => {
   return news;
 };
 
+const update = async (id, data) => {
+  const news = await News.findByPk(id, {
+    include: [
+      {
+        model: User,
+        as: "author",
+      },
+    ],
+  });
+
+  if (!news) {
+    return null;
+  }
+  let where = {};
+
+  if (data.title) {
+    where = { ...where, title: data.title };
+  }
+  if (data.msg) {
+    where = { ...where, msg: data.msg };
+  }
+  if (data.img) {
+    where = { ...where, img: data.img };
+  }
+  return news.update(where);
+};
+
 module.exports = {
   getAll,
   create,
   dislike,
   like,
-  remove
+  remove,
+  update,
 };
